@@ -1,0 +1,206 @@
+<div class="pt-3"></div>
+
+<div class="bg-danger container" *ngIf="begin">
+    <div class="p-3"></div>
+    <h1 class="d-flex justify-content-center" style="color:white;">SELECIONE UMA OPERAÇÃO</h1>
+</div>
+<div class="bg-danger container" *ngIf="operations[0]">
+    <div class="p-3"></div>
+    <h1 class="d-flex justify-content-center" style="color:white;">SAÍDA</h1>
+    <label style="color:white;"><h3>Movimentação</h3></label>
+    <div class="p-3"></div>
+</div>
+<div class="bg-success container" *ngIf="operations[1]">
+    <div class="p-3"></div>
+    <h1 class="d-flex justify-content-center" style="color:white;">ENTRADA</h1>
+    <label style="color:white;"><h3>Movimentação</h3></label>
+    <div class="p-3"></div>
+</div>
+<div class="bg-warning container" *ngIf="operations[2]">
+    <div class="p-3"></div>
+    <h1 class="d-flex justify-content-center" style="color:white;">TRANSFERÊNCIA</h1>
+    <label style="color:white;"><h3>Movimentação</h3></label>
+    <div class="p-3"></div>
+</div>
+<div class="container" style="border:1px solid rgb(25, 135, 84)">
+    <div class="pt-3"></div>
+    <div class="d-flex justify-content-center">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="INFLOW" (click)="radioOperation($event)">
+            <label class="form-check-label" for="inlineRadio1">SAÍDA</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="OUTFLOW" (click)="radioOperation($event)">
+            <label class="form-check-label" for="inlineRadio2">ENTRADA</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="TRANSFER" (click)="radioOperation($event)">
+            <label class="form-check-label" for="inlineRadio3">TRANSFERÊNCIA</label>
+        </div>
+    </div>
+    <hr style="border: 1px solid rgb(25, 135, 84);">
+    <div class="pt-3"></div>
+
+
+
+    <div [formGroup]="form" *ngIf="operations[0]">
+
+        <div class="pt-3"></div>
+
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>Grupo de Saída</label>
+                <select class="form-select" style="text-align-last:center; text-align: center;">
+          <option class="align-self-end" type="text" formControlName="name">Alimentação Mensal</option>
+          <option type="text" formControlName="name">Combustível Mensal</option>
+          <option type="text" formControlName="name">Lanche Rua</option>
+          <option type="text" formControlName="name">Multa de trânsito</option>
+        </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>Data</label>
+                <input class="form-control " type="date" formControlName="name" style="text-align-last:center; text-align: center;" style="text-align-last:center; text-align: center;" placeholder="Dia e horario do gasto">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>R$</label>
+                <input class="form-control " type="text" formControlName="name" style="text-align-last:center; text-align: center;" placeholder="Valor do gasto">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>SAI DE ONDE</label>
+                <select class="form-select" style="text-align-last:center; text-align: center;">
+          <option class="align-self-end" type="text" formControlName="name">Carteira</option>
+          <option type="text" formControlName="name">Cartão de Credito (Master) Final 2905</option>
+          <option type="text" formControlName="name">Cartão de Credito (Master) Emergenciais</option>
+          <option type="text" formControlName="name">Conta Banco do Brasil Agencia 0035</option>
+        </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>Descrição Detalhada</label>
+                <input type="text" class="form-control" formControlName="name" style="text-align-last:center; text-align: center;" placeholder="Local ou pessoa, motivos etc...">
+            </div>
+        </div>
+
+        <div class="p-3"></div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-outline-success" style="float:right; width: 150px;">Salvar</button>
+            </div>
+        </div>
+
+
+    </div>
+    <div [formGroup]="form" *ngIf="operations[1]">
+
+        <div class="pt-3"></div>
+
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>Grupo de Entrada</label>
+                <select class="form-select" style="text-align-last:center; text-align: center;">
+          <option class="align-self-end" type="text" formControlName="name">Salário</option>
+          <option type="text" formControlName="name">Venda</option>
+          <option type="text" formControlName="name">Comissão</option>
+          <option type="text" formControlName="name">Serviço</option>
+        </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>Data</label>
+                <input class="form-control " type="date" formControlName="name" style="text-align-last:center; text-align: center;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>R$</label>
+                <input class="form-control " type="text" formControlName="name" style="text-align-last:center; text-align: center;" placeholder="Valor adquirido">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>ENTROU DE ONDE</label>
+                <select class="form-select" style="text-align-last:center; text-align: center;">
+          <option class="align-self-end" type="text" formControlName="name">Carteira</option>
+          <option type="text" formControlName="name">Cartão de Credito (Master) Final 2905</option>
+          <option type="text" formControlName="name">Cartão de Credito (Master) Emergenciais</option>
+          <option type="text" formControlName="name">Conta Banco do Brasil Agencia 0035</option>
+        </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>Descrição Detalhada</label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+        </div>
+
+        <div class="p-3"></div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-outline-success" style="float:right; width: 150px;">Salvar</button>
+            </div>
+        </div>
+        <div class="p-3"></div>
+    </div>
+    <div [formGroup]="form" *ngIf="operations[2]">
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>SAI DE ONDE</label>
+                <select class="form-select" style="text-align-last:center; text-align: center;">
+          <option class="align-self-end" type="text" formControlName="name">Carteira</option>
+          <option type="text" formControlName="name">Cartão de Credito (Master) Final 2905</option>
+          <option type="text" formControlName="name">Cartão de Credito (Master) Emergenciais</option>
+          <option type="text" formControlName="name">Conta Banco do Brasil Agencia 0035</option>
+        </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>ENTRADA AONDE</label>
+                <select class="form-select" style="text-align-last:center; text-align: center;">
+          <option class="align-self-end" type="text" formControlName="name">Carteira</option>
+          <option type="text" formControlName="name">Cartão de Credito (Master) Final 2905</option>
+          <option type="text" formControlName="name">Cartão de Credito (Master) Emergenciais</option>
+          <option type="text" formControlName="name">Conta Banco do Brasil Agencia 0035</option>
+        </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>Data</label>
+                <input class="form-control " type="date" formControlName="name" style="text-align-last:center; text-align: center;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>R$</label>
+                <input class="form-control " type="text" formControlName="name" style="text-align-last:center; text-align: center;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label style="font-size: 20px; color:red;">*</label><label>Descrição Detalhada</label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+        </div>
+
+        <div class="p-3"></div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-outline-success" style="float:right; width: 150px;">Salvar</button>
+            </div>
+        </div>
+        <div class="p-3"></div>
+    </div>
+    <div class="p-3"></div>
+
+</div>
+<div class="pt-5"></div>

@@ -1,0 +1,103 @@
+<div class="container">
+
+    <table class="row">
+        <td class="col-6">
+            <h1>Cadastro</h1>
+            <p>Receita / Despesas</p>
+        </td>
+
+        <div class="container">
+            <td class="row">
+                <button class="btn btn-success" (click)="addControls()" style="width:150px; margin-left:140px;">ADICIONAR</button>
+            </td>
+        </div>
+        <div class="pt-3"></div>
+    </table>
+
+
+
+
+    <div class="d-inline-flex" *ngFor="let s of controls.controls; let i = index;">
+
+        <table class="container">
+            <tr class="row">
+
+                <div class="card border-success mb-3 col-12" style="max-width: 18rem; width: 100%;">
+                    <div *ngIf="!header" class="row card-header bg-danger" style="color:white; ">{{'Despesas'}}</div>
+                    <div *ngIf="header" class="row card-header bg-success" style="color:white;">{{'Receita'}}</div>
+                    <div class="card-body text-success">
+                        <h5 class="card-title">{{name.value}}</h5>
+
+
+                        <div [formGroup]="form">
+                            <div formArrayName="statics">
+
+                                <div [formGroupName]="i">
+
+                                    <td class="col">
+                                        <div class="form-check">
+                                            <input (click)="check()" class="form-check-input" type="checkbox" formControlName="inflow">
+                                            <label class="form-check-label">Receita</label>
+                                        </div>
+                                    </td>
+                                    <div class="col-12">
+                                        <label style="font-size: 20px; color:red;">*</label><label>Nome</label>
+                                        <input #name type="text" class="form-control" formControlName="name" [ngClass]="{'is-invalid': touchedErrorsArray(controls, i+'.name')}">
+                                        <div class="invalid-feedback">
+                                            {{requiredArray(controls, i+'.name', 'Nome', 3, 1000)}}
+                                        </div>
+
+
+                                        <label style="font-size: 20px; color:white;">*</label><label>Descrição</label>
+                                        <input class="form-control" formControlName="description" [ngClass]="{'is-invalid': touchedErrorsArray(controls, i+'.description')}">
+                                        <div class="invalid-feedback">
+                                            {{requiredArray(controls, i+'.description', 'Titular', 3, 1000)}}
+                                        </div>
+
+                                        <table class="container">
+                                            <tr class="row">
+                                                <td class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" formControlName="static">
+                                                        <label class="form-check-label">Mensal</label>
+                                                    </div>
+                                                </td>
+                                                <td class="col">
+                                                    <div class="form-check" style="float:right;">
+                                                        <label class="form-check-label">Variável</label>
+                                                        <input class="form-check-input" type="radio" formControlName="variable">
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="pt-3"></div>
+                                                    <div class="col-6" style="float:right;">
+                                                        <button class="btn btn-outline-danger" style="float:right;">Remover</button>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="pt-3"></div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-outline-success" style="float:right; width: 150px;">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+        </table>
+
+        <div class="p-5"></div>
+    </div>
+    <!-- (click)="removeControls(i) -->
+
+</div>

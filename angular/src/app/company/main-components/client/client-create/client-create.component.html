@@ -1,0 +1,70 @@
+<div class="container" id="general">
+    <div class="row justify-content-center">
+
+        <div class="row" [formGroup]="form">
+            <div>
+                <h1 class="row justify-content-center">Cliente</h1>
+            </div>
+            <div class="row">
+                <h6>IDENTIFICAÇÃO</h6>
+            </div>
+            <div class="col-6 justify-content-center">
+                <label style="font-size: 20px; color:red;">*</label><label for="">NOME</label>
+                <input class="form-control" formControlName="name" [ngClass]="{'is-invalid': touchedErrors('name', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'name', 'Nome', 0, 150)}}
+                </div>
+
+
+                <div class="pt-3"></div>
+            </div>
+            <div class="col-6">
+                <label for="">SEGMENTO</label>
+                <input type="text" class="form-control" formControlName="segment" [ngClass]="{'is-invalid': touchedErrors('segment', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'segment', 'Segmento', 0, 50)}}
+                </div>
+                <div class="pt-3"></div>
+            </div>
+            <div class="col-6">
+                <label for="">IE</label>
+                <input type="text" class="form-control" formControlName="ie" [ngClass]="{'is-invalid': touchedErrors('ie', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'ie', 'Inscrição Estadual', 9, 9)}}
+                </div>
+                <div class="pt-3"></div>
+            </div>
+            <div class="col-6">
+                <label for="">IM</label>
+                <input type="text" class="form-control" formControlName="im" [ngClass]="{'is-invalid': touchedErrors('im', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'im', 'Inscrição Municipal', 11, 11)}}
+                </div>
+                <div class="pt-3"></div>
+            </div>
+
+            <div>
+                <label style="font-size: 20px; color:red;">*</label><label for="">CPF/CNPJ</label>
+
+                <input class="form-control" formControlName="cnpj" mask="CPF_CNPJ" [ngClass]="{'is-invalid': touchedErrors('cnpj', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'cnpj', 'CPF/CNPJ', 0, 50)}}
+                </div>
+                <div class="pt-3"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <address></address>
+    <contact></contact>
+    <button [disabled]="!form.valid" type="button" class=" btn btn-success" style="width:300px; float: right;" (click)="save()">Salvar</button>
+
+
+
+
+
+    <div class="pt-5"></div>
+</div>
+<div class="pt-5"></div>
+<!-- {{form.value | json}}  -->

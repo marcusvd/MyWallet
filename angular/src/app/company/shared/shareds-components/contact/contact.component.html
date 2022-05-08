@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="row">
+            <h6>CONTATOS</h6>
+        </div>
+    </div>
+    <div class="pt-3"></div>
+    <div class="row justify-content-center" [formGroup]="this.form">
+        <div class="row">
+            <div class="col-6">
+                <label style="font-size: 20px; color:red;">*</label><label>Email:</label>
+                <input type="text" class="form-control" formControlName="email" [ngClass]="{'is-invalid': touchedErrors('email', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'email', 'Email', 3, 1000)}}
+                </div>
+            </div>
+            <div class="col-6">
+                <label>Site:</label>
+                <input class="form-control" formControlName="site" [ngClass]="{'is-invalid': touchedErrors('site', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'site', 'Site', 3, 1000)}}
+                </div>
+            </div>
+        </div>
+        <div class="pt-3"></div>
+        <div class="row">
+            <div class="col-4">
+                <label>WhatsApp</label>
+                <input class="form-control" formControlName="zap" mask="(00) 0-0000-0000" [ngClass]="{'is-invalid': touchedErrors('zap', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'zap', 'WhatsApp', 11, 16)}}
+                </div>
+            </div>
+            <div class="col-4">
+                <label style="font-size: 20px; color:red;">*</label><label> Celular:</label>
+                <input class="form-control" formControlName="cel" mask="(00) 0-0000-0000" [ngClass]="{'is-invalid': touchedErrors('cel', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'cel', 'Celular', 11, 16)}}
+                </div>
+            </div>
+
+            <div class="col-4">
+                <label>Tel. Fixo:</label>
+                <input class="form-control" formControlName="landline" mask="(00) 0000-0000" [ngClass]="{'is-invalid': touchedErrors('landline', this.form)}">
+                <div class="invalid-feedback">
+                    {{required(form, 'landline', 'Tel. Fixo:', 8, 14)}}
+                </div>
+            </div>
+            <!-- space -->
+            <div class="pt-3"></div>
+            <!-- space -->
+            <div class="col-10">
+                <h4 style="height: 50px;">Redes Sociais</h4>
+            </div>
+
+            <div class="col-2">
+                <button type="button" class=" btn btn-primary" (click)="addControls()" style="width:100%;">Adicionar</button>
+            </div>
+            <hr>
+
+        </div>
+        <div class="pt-3"></div>
+        <div formArrayName="socialnetworks" *ngFor="let _sN of controls.controls let i = index">
+            <div [formGroupName]="i" class="row">
+
+                <div class="col-4">
+                    <label>Rede Social</label>
+                    <input #nameFiled class="form-control" id="socialnetName" formControlName="name" [ngClass]="{'is-invalid': touchedErrorsArray(controls, i+'.name')}">
+
+                    <div class="invalid-feedback">
+                        {{requiredArray(controls, i+'.name', 'Nome', 0, 150)}}
+                    </div>
+                </div>
+                <!-- (change)="valueSocialNetName($event)" -->
+                <div class="col-6">
+                    <label>Url</label>
+                    <input #urlFIeld class="form-control" id="socialnetUrl" formControlName="url" [ngClass]="{'is-invalid': touchedErrorsArray(controls, i+'.url')}">
+                    <div class="invalid-feedback">
+                        {{requiredArray(controls, i+'.url', 'Url', 0, 150)}}
+                    </div>
+                </div>
+
+                <button class="btn btn-danger col-2 mt-4" (click)="removeControls(i)" style="width:14%; height: 50%;">Remover</button>
+            </div>
+        </div>
+        <!-- space -->
+        <div class="pt-3"></div>
+        <!-- space -->
+
+    </div>
+
+
+    <!-- <div class="text-center">
+        {{this.form.value|json}}
+    </div> -->
+
+</div>
