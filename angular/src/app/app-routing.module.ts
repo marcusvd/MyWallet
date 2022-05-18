@@ -11,13 +11,17 @@ import { AddressComponent } from './company/shared/shareds-components/address/ad
 import { ContactComponent } from './company/shared/shareds-components/contact/contact.component';
 import { GeneralRegistersComponent } from './company/shared/shareds-components/general-registers/general-registers.component';
 import { InOutCreateComponent } from './company/main-components/flows/in-out/in-out-create.component';
+import { LoginComponent } from './company/main-components/authentication/login/login.component';
+import { RegisterComponent } from './company/main-components/authentication/register/register.component';
 
 const routes: Routes = [
 
 
   { path: 'operations', component: RegisterCreateComponent },
   { path: 'inout', component: InOutCreateComponent },
-  { path: 'account', component: AccountCreateComponent }
+  { path: 'account', component: AccountCreateComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent }
 
 ];
 

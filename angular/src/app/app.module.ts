@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+import * as firebase from 'firebase/app';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,13 +14,12 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BankModule } from './company/main-components/bank/modules/bank.module';
+
 import { FlowModule } from './company/main-components/flows/module/flow.module';
 
-
-
-
-
-
+import { getAnalytics } from "firebase/analytics";
+import { LoginModule } from './company/main-components/authentication/login/modules/login.module';
+import { RegisterModule } from './company/main-components/authentication/register/modules/register.module';
 
 
 @NgModule({
@@ -36,12 +37,14 @@ import { FlowModule } from './company/main-components/flows/module/flow.module';
     ProductModule,
     BankModule,
     FlowModule,
+    LoginModule,
+    RegisterModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
     TooltipModule.forRoot()
   ],
   providers: [],
-  exports:[],
+  exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule  {}

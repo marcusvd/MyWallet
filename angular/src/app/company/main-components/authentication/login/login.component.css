@@ -1,0 +1,15 @@
+/* #shadow {
+    box-shadow: rgb( 25, 135, 84) 0px 54px 55px;
+    border: 2px solid rgb( 25, 135, 84);
+} */
+
+#theme {
+    color: rgb( 25, 135, 84);
+}
+
+#vertical {
+    border-left: 4px solid rgb( 25, 135, 84);
+    height: 400px;
+    position: absolute;
+    left: 50%;
+}

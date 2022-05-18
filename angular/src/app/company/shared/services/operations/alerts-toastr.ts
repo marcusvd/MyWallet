@@ -10,18 +10,29 @@ import { ToastrService } from 'ngx-toastr';
 export class AlertsToastr {
 
 
-  private ActionsMessages: string[] = ['Cadastrado.', 'Atualizado.', 'Excluido.', 'Seja, bem vindo!']
-  private Erro: string = 'Estamos com algum problema.';
-  public ErrorAuthenticationFail = 'Falha de login, usuário não autenticado!';
+  private ActionsMessages: string[] =
+  [
+  'Cadastrado.', 'Atualizado.', 'Excluido.',
+  'Seja, bem vindo!', 'Falha de login, usuário não autenticado!',
+  'Estamos com algum problema.'
+  ]
+
+
   constructor(private _Toast: ToastrService) { }
 
-  public Notice(personalMessage?: string, actMsg?: number, actMsgType?: string, LayerErrorApp?: string) {
+  public Notice(personalMessage?: string, actMsg?: number, actMsgType?: string) {
     if (actMsgType == 'success') {
       this._Toast.success('Sucesso!!! ' + personalMessage + ' ' + this.ActionsMessages[actMsg])
     }
     if (actMsgType == 'error') {
-      this._Toast.error(this.Erro + ' ' + LayerErrorApp + ', ' + 'Por favor, entre em contato com o suporte técnico.' + ' ' + personalMessage)
+      this._Toast.error(this.ActionsMessages[actMsg] +', ' + 'Por favor, entre em contato com o suporte técnico.' + ' ' + personalMessage)
     }
+
+
+    // if (actMsgType != 'error' || 'success') {
+    //   this._Toast.warning('Your code!!','ERROR')
+    // }
+
 
 
   }

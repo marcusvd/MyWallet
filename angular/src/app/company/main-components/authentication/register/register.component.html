@@ -1,0 +1,73 @@
+<div class="container" id="general">
+    <div class="row">
+
+    </div>
+    <form [formGroup]="form">
+
+
+
+        <table>
+            <tr class="row ">
+                <td class="col-6" id="fig">
+                    <div id="fig" class="row justify-content-center">
+                        <img src="../../../../../assets/financial2.png" style="width:400px; height:400px;">
+                    </div>
+
+                </td>
+
+                <td class="col-6">
+                    <div class="pt-3"></div>
+                    <h1 style="color:rgb(25,135,84); text-align: center;">Quase lá...</h1>
+                    <div class="row justify-content-end">
+                        <div class="row">
+                            <label><label style="font-size: 20px; color:red;">*</label>E-mail</label>
+                            <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': touchedErrors('email', this.form)}">
+                            <div class="invalid-feedback">
+                                {{required(form, 'email', 'E-MAIL', 0, 150)}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label><label style="font-size: 20px; color:red;">*</label>Nome de usuário</label>
+                            <input type="text" class="form-control" formControlName="userName" [ngClass]="{'is-invalid': touchedErrors('userName', this.form)}">
+                            <div class="invalid-feedback">
+                                {{required(form, 'userName', 'Nome de usuário', 0, 150)}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label><label style="font-size: 20px; color:red;">*</label>Nome Completo</label>
+                            <input type="text" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': touchedErrors('fullName', this.form)}">
+                            <div class="invalid-feedback">
+                                {{required(form, 'fullName', 'Nome Completo', 0, 150)}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label><label style="font-size: 20px; color:red;">*</label>Senha</label>
+                            <input type="password" class="form-control" formControlName="password" [ngClass]="{'is-invalid': touchedErrors('password', this.form)}">
+                            <div class="invalid-feedback">
+                                {{required(form, 'password', 'Senha', 0, 150)}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label><label style="font-size: 20px; color:red;">*</label>Confirmar senha</label>
+                            <input type="password" class="form-control" formControlName="confirmPassword" [ngClass]="{'is-invalid': touchedErrors('confirmPassword', this.form)}">
+                            <div class="invalid-feedback">
+                                {{required(form, 'confirmPassword', 'Confirmar Senha', 0, 150)}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-3"></div>
+                    <div class="row justify-content-center">
+                        <button [disabled]="!form.valid" type="button" class=" btn btn-success" style="width:353px;" (click)="save()">REGISTRAR</button>
+                    </div>
+                    <div class="row justify-content-center" style="display:none;">
+                        <button type="button" class=" btn btn-success" style="width:353px;" (click)="save()">Teste</button>
+                    </div>
+                    <div class="pt-3"></div>
+                </td>
+            </tr>
+        </table>
+
+
+    </form>
+</div>
+<!-- {{form.value | json}}  -->
