@@ -3,9 +3,6 @@
 
     </div>
     <form [formGroup]="form">
-
-
-
         <table>
             <tr class="row ">
                 <td class="col-6" id="fig">
@@ -57,10 +54,10 @@
                     </div>
                     <div class="pt-3"></div>
                     <div class="row justify-content-center">
-                        <button [disabled]="!form.valid" type="button" class=" btn btn-success" style="width:353px;" (click)="save()">REGISTRAR</button>
+                        <button [disabled]="!form.valid" type="button" class=" btn btn-success" style="width:353px;" (click)="registerUser()">REGISTRAR</button>
                     </div>
                     <div class="row justify-content-center" style="display:none;">
-                        <button type="button" class=" btn btn-success" style="width:353px;" (click)="save()">Teste</button>
+                        <button type="button" class=" btn btn-success" style="width:353px;" (click)="registerUser()">Teste</button>
                     </div>
                     <div class="pt-3"></div>
                 </td>

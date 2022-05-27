@@ -1,6 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Form, FormArray, FormControl } from "@angular/forms";
 import { FormArrayName, FormBuilder, FormGroup, FormGroupName, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { addDoc, collection } from "firebase/firestore";
+import { AlertsToastr } from "src/app/company/shared/services/operations/alerts-toastr";
+import { FireBaseDbService } from "src/app/company/shared/services/operations/fire-base-db.service";
+import { ValidatorsGlobal } from "src/app/company/shared/services/operations/validators-global";
 import { SocialNetworkDto } from "src/app/company/shared/shareds-components/contact/dto/social-network-dto";
 import { CardDto } from "../dto/card-dto";
 
@@ -12,7 +17,8 @@ import { CardDto } from "../dto/card-dto";
 export class AccountCreateService {
 
 
-  private _keys: any[] = [{ 'key':"CPF", 'selected': false }, {'key':"CNPJ", 'selected': false }, { 'key':"CELULAR", 'selected': false}, { 'key':"E-MAIL", 'selected': false }]
+
+  private _keys: any[] = [{ 'key': "CPF", 'selected': false }, { 'key': "CNPJ", 'selected': false }, { 'key': "CELULAR", 'selected': false }, { 'key': "E-MAIL", 'selected': false }]
 
 
   // { 'key':"CPF", 'selected': false }, {'key':"CNPJ", 'selected': false }, { 'key':"CELULAR", 'selected': false}, { 'key':"E-MAIL", 'selected': false }
@@ -35,6 +41,10 @@ export class AccountCreateService {
 
   constructor(
     private _Fb: FormBuilder,
+    private _FireBaseDbService: FireBaseDbService,
+    private _AlertsToastr: AlertsToastr,
+    private _Router: Router,
+    private _Validator: ValidatorsGlobal,
   ) { }
 
 
@@ -47,10 +57,29 @@ export class AccountCreateService {
   get pixTypeSingle(): any[] {
     return this._keys;
   }
-  // set pixIf(type: string) {
-  //   this.typeP = type;
-  // }
 
+
+  async save(base: string, form: any) {
+
+    //  if (base || form === null || undefined || NaN) return null;
+
+    try {
+
+      const docRef = await addDoc(collection(this._FireBaseDbService.dbLoad(), base), form as JSON);
+
+      // this._Router.navigateByUrl('/login');
+
+      this._AlertsToastr.Notice(`Conta do banco,  ${form.value.institution}`, 0, 'success');
+
+   //   return form //docRef.id;
+
+
+    } catch (e) {
+      console.log(e);
+
+    }
+
+  }
 
   get formGet(): FormGroup {
     return this._formAccount;
@@ -151,8 +180,7 @@ export class AccountCreateService {
 
   card(): FormGroup {
     return this._Card = this._Fb.group({
-      institution: ['', []],
-      holder: ['', []],
+      name: ['', []],
       flag: ['', []],
       numbercard: ['', []],
       checkcode: ['', []],

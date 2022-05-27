@@ -7,13 +7,13 @@ import { NgxModule } from "src/app/company/shared/modules/ngx.module";
 import { SharedModule } from "src/app/company/shared/modules/shared.module";
 import { InOutCreateService } from '../in-out/services/in-out-create.service';
 
-import { RegisterCreateService } from '../register/services/register-create.service';
-import { RegisterCreateComponent } from '../register/register-create.component';
+import { FinancialRegisterCreateService } from '../register/services/financial-register-create.service';
+import { FinancialRegisterCreateComponent } from '../register/financial-register-create.component';
 import { InOutCreateComponent } from '../in-out/in-out-create.component';
 
 @NgModule({
   declarations: [
-    RegisterCreateComponent,
+    FinancialRegisterCreateComponent,
     InOutCreateComponent
 
   ],
@@ -28,6 +28,6 @@ import { InOutCreateComponent } from '../in-out/in-out-create.component';
   exports: [
 
   ],
-  providers: [InOutCreateService, RegisterCreateService]
+  providers: [InOutCreateService, FinancialRegisterCreateService]
 })
 export class FlowModule { }

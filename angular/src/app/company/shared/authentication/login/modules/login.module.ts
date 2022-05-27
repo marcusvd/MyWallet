@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/company/shared/modules/shared.module';
 import { NgxModule } from 'src/app/company/shared/modules/ngx.module';
 import { RouterModule } from '@angular/router';
-import { LoginService } from '../services/login.service';
+
 
 
 @NgModule({
@@ -18,6 +18,6 @@ import { LoginService } from '../services/login.service';
     RouterModule,
   ],
   declarations: [LoginComponent],
-  providers:[LoginService]
+  providers:[]
 })
 export class LoginModule { }

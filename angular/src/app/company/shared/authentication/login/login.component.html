@@ -53,8 +53,11 @@
 
                                 <div class="pt-3"></div>
                                 <div class="row justify-content-center">
-                                    <button [disabled]="!form.valid" type="button" class=" btn btn-success" style="width:353px;">ENTRAR</button>
+                                    <button [disabled]="!form.valid" type="button" class=" btn btn-success" style="width:353px;" [routerLink]="['/welcomedash']" (click)="login()">ENTRAR</button>
                                 </div>
+                                <!-- <div class="row justify-content-center">
+                                    <button type="button" class=" btn btn-success" style="width:353px;" (click)="test()">TESTE</button>
+                                </div> -->
                                 <div class="pt-3"></div>
                                 <div class="row justify-content-center" [routerLink]="['/register']">
                                     <h3>CADASTRO</h3>

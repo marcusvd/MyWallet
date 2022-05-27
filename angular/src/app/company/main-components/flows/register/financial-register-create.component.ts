@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { ContactDto } from 'src/app/company/shared/shareds-components/contact/dto/contact-dto';
-import { SocialNetworkDto } from 'src/app/company/shared/shareds-components/contact/dto/social-network-dto';
 import { ValidatorsGlobal } from 'src/app/company/shared/services/operations/validators-global';
 import { InOutCreateService } from 'src/app/company/main-components/flows/in-out/services/in-out-create.service';
 
 
 @Component({
   selector: 'register-create',
-  templateUrl: './register-create.component.html',
-  styleUrls: ['./register-create.component.css']
+  templateUrl: './financial-register-create.component.html',
+  styleUrls: ['./financial-register-create.component.css']
 })
-export class RegisterCreateComponent implements OnInit {
+export class FinancialRegisterCreateComponent implements OnInit {
 
 
   public tp: string;
@@ -36,7 +34,6 @@ export class RegisterCreateComponent implements OnInit {
   }
   radioOperation($event: any) {
 
-
     switch ($event.target.value) {
       case 'INFLOW':
         this.operations[0] = true;
@@ -60,7 +57,6 @@ export class RegisterCreateComponent implements OnInit {
         break
 
     }
-
 
   }
   requiredArray(formArray: FormArray, ctrl: string, ctrlToShow: string, lengthMin?: number, lengthMax?: number) {

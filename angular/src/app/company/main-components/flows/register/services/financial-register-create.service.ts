@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
   providedIn: 'root'
 })
 
-export class RegisterCreateService {
+export class FinancialRegisterCreateService {
 
   private _formMain: FormGroup;
 

@@ -103,7 +103,9 @@ export class AccountCreateComponent implements OnInit {
     return this._AccountService.cardsControls
   }
 
-
+  async save(base: string, form:any) {
+    this._AccountService.save(base, form);
+  }
 
   ngOnInit(): void {
     this._AccountService.formLoad()

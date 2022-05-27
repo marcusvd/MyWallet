@@ -1,30 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ValidatorsGlobal } from 'src/app/company/shared/services/operations/validators-global';
-import { ClientDto } from '../dto/client-dto';
-import { ClientCreateServices } from '../services/client-create.service';
+import { AuthService } from '../auth/auth.service';
+import { RegisterDto } from './dto/register-dto';
+import { RegisterService } from './services/register.service';
+
 
 @Component({
-  selector: 'client-create',
-  templateUrl: './client-create.component.html',
-  styleUrls: ['./client-create.component.css']
+  selector: 'register-comp',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class ClientCreateComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   constructor(
-    private _CliCreateServices: ClientCreateServices,
+    private _Auth: AuthService,
+    // private _Register: RegisterService,
     private _Validator: ValidatorsGlobal,
-    ) { }
+  ) { }
 
-
-
-  save() {
-    this._CliCreateServices.save();
-  }
 
   get form(): FormGroup {
-    return this._CliCreateServices.formGet;
+    return this._Auth.getFormRegister;
   }
+
+registerUser(){
+  this._Auth.registerUser();
+}
+
+
 
   required(form: FormGroup, ctrl: string, ctrlToShow: string, lengthMin?: number, lengthMax?: number) {
     return this._Validator.required(form,
@@ -42,8 +46,7 @@ export class ClientCreateComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    this._CliCreateServices.builderForm();
+        this._Auth.formLoadRegister();
   }
 
 }
