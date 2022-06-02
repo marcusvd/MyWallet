@@ -22,8 +22,9 @@ export class AlertsToastr {
 
   public Notice(personalMessage?: string, actMsg?: number, actMsgType?: string) {
     if (actMsgType == 'success') {
-      this._Toast.success('Sucesso!!! ' + personalMessage + ' ' + this.ActionsMessages[actMsg])
+      this._Toast.success(personalMessage + ' ' + this.ActionsMessages[actMsg] + ' Sucesso!!! ')
     }
+
     if (actMsgType == 'error') {
       this._Toast.error(this.ActionsMessages[actMsg] +', ' + 'Por favor, entre em contato com o suporte técnico.' + ' ' + personalMessage)
     }

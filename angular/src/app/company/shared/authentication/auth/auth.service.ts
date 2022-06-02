@@ -8,38 +8,47 @@ import { Router } from "@angular/router";
 //Auth and database
 import * as authentication from 'firebase/auth'
 import { collection, addDoc, doc, getDoc, Firestore } from "firebase/firestore";
-import { getAuth, signOut, UserCredential } from "firebase/auth";
-
+import { getAuth, signOut, User, UserCredential } from "firebase/auth";
 import { AlertsToastr } from "src/app/company/shared/services/operations/alerts-toastr";
-
 import { FireBaseDbService } from "src/app/company/shared/services/operations/fire-base-db.service";
-
 import { RegisterDto } from "src/app/company/shared/authentication/register/dto/register-dto";
-
-
 import { BackEnd } from '../../services/operations/back-end';
 import { BehaviorSubject } from 'rxjs';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
 
 @Injectable()
 export class AuthService {
 
-
   private _formMain: FormGroup;
 
-
+  private userData: any;
 
 
   private currentUserSubject = new BehaviorSubject<authentication.User>(JSON.parse(localStorage.getItem('usr')));
 
-
   constructor(
     protected Http: HttpClient,
+    // private _Afs: AngularFirestore,
+    // private _Afa: AngularFireAuth,
     private _Fb: FormBuilder,
     private _FireBaseDbService: FireBaseDbService,
     private _AlertsToastr: AlertsToastr,
     private _Router: Router,
   ) {
-
+    // this._Afa.authState.subscribe((usr) => {
+    //   if (usr) {
+    //     this.userData = usr;
+    //     localStorage.setItem('usr', JSON.stringify(this.userData));
+    //     JSON.parse(localStorage.getItem('usr')!);
+    //   } else {
+    //     localStorage.setItem('usr', null);
+    //     JSON.parse(localStorage.getItem('usr')!);
+    //   }
+    // })
   }
 
 
@@ -71,35 +80,35 @@ export class AuthService {
     })
   }
 
-  async addUserRegister(user: RegisterDto): Promise<string> {
-    let idReturn: string = '';
+  // async addUserRegister(user: RegisterDto): Promise<string> {
+  //   let idReturn: string = '';
 
-    try {
-      const docRef = await addDoc(collection(this._FireBaseDbService.dbLoad(), "users_details"), {
-        "userName": user.userName,
-        "email": user.email,
-        "fullName": user.fullName,
-      });
-      idReturn = docRef.id;
-      return idReturn;
-    } catch (e) {
+  //   try {
+  //     const docRef = await addDoc(collection(this._FireBaseDbService.dbLoad(), "users_details"), {
+  //       "userName": user.userName,
+  //       "email": user.email,
+  //       "fullName": user.fullName,
+  //     });
+  //     idReturn = docRef.id;
+  //     return idReturn;
+  //   } catch (e) {
 
-    }
-    return idReturn
-  }
+  //   }
+  //   return idReturn
+  // }
 
-  async updateDisplayName(id: string, usr: UserCredential) {
-    const docRef = doc(this._FireBaseDbService.dbLoad(), "/users_details", id);
-    const docSnap = await getDoc(docRef);
+  // async updateDisplayName(id: string, usr: UserCredential) {
+  //   const docRef = doc(this._FireBaseDbService.dbLoad(), "/users_details", id);
+  //   const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
+  //   if (docSnap.exists()) {
 
-      authentication.updateProfile(usr.user, { displayName: docSnap.get('userName') })
+  //     authentication.updateProfile(usr.user, { displayName: docSnap.get('userName') })
 
-      return docSnap.get('userName');
-    }
+  //     return docSnap.get('userName');
+  //   }
 
-  }
+  // }
 
   registerUser() {
     const register: RegisterDto = { ...this._formMain.value }
@@ -111,10 +120,8 @@ export class AuthService {
         delete register.password;
         delete register.confirmPassword;
 
-        this.addUserRegister(register).then((id => {
-          this.updateDisplayName(id, res)
-        }));
 
+       this.setUserData(res, register.userName);
 
         this._Router.navigateByUrl('/login');
 
@@ -123,7 +130,7 @@ export class AuthService {
 
       }).catch((err: Error) => {
         console.log(err)
-        this._AlertsToastr.Notice(`Usuário,  ${register.userName}`, 5, 'error');
+        // this._AlertsToastr.Notice(`Usuário,  ${register.userName}`, 5, 'error');
       })
 
   }
@@ -134,32 +141,45 @@ export class AuthService {
   login(login: LoginDto) {
     const auth = getAuth();
     authentication.signInWithEmailAndPassword(auth, login.email, login.password)
-      .then((result: any) => {
-        this._AlertsToastr.Notice(`Usuário,  ${auth.currentUser.displayName}`, 5, 'success');
+      .then((result: UserCredential) => {
+       this._AlertsToastr.Notice(`Usuário,  ${auth.currentUser.displayName}`, 5, 'success');
         localStorage.setItem('usr', JSON.stringify(auth.currentUser));
-        window.location.reload();
-        console.log(result)
+        //window.location.reload();
+
+
+
+        // console.log('AQUI', result.user);
+
+
       }).catch((error: Error) => {
-        this._AlertsToastr.Notice(`Usuário,  ${auth.currentUser.displayName}`, 5, 'error');
+       // this._AlertsToastr.Notice(`Usuário,  ${auth.currentUser.displayName}`, 5, 'error');
         console.log(error)
       }
       )
   }
 
+
+  setUserData(_user: UserCredential, displayName: string) {
+    authentication.updateProfile(_user.user, {displayName:displayName})
+}
   logOut() {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        this._AlertsToastr.Notice(`Usuário,  ${JSON.parse(localStorage.getItem('usr')).displayName}`, 5, 'success');
+        this._AlertsToastr.Notice(`${JSON.parse(localStorage.getItem('usr')).displayName} Até Mais...`, 5, 'success');
         localStorage.removeItem('usr');
-        window.location.reload();
+        this._Router.navigateByUrl('/login');
+        //window.location.reload();
       }).catch((error: Error) => {
-        this._AlertsToastr.Notice(`Usuário,  ${JSON.parse(localStorage.getItem('usr')).displayName}`, 5, 'error');
+     //   this._AlertsToastr.Notice(`Usuário,  ${JSON.parse(localStorage.getItem('usr')).displayName}`, 5, 'error');
         localStorage.removeItem('usr');
-        window.location.reload();
+       // window.location.reload();
       });
 
-  }
+}
+
+
+
 
   // isLogged(): authentication.User {
   //   const auth = getAuth();
@@ -177,7 +197,7 @@ export class AuthService {
   // }
 
 
-  public get currentUserValue(): authentication.User{
+  public get currentUserValue(): authentication.User {
     return this.currentUserSubject.value;
   }
 

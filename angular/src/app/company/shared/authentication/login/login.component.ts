@@ -11,7 +11,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 //Auth and database
 import * as authentication from 'firebase/auth'
-import { getAuth } from 'firebase/auth';
+import { getAuth, User } from 'firebase/auth';
 
 
 
@@ -44,26 +44,30 @@ export class LoginComponent implements OnInit {
         return user?.displayName;
       }
       return null;
-    }
+    })
 
-    )};
+    // const result = JSON.parse(localStorage.getItem('usr')) as User;
+
+    // return result.email
+
+    };
 
 
 
 
 
-  test() {
-    const auth = getAuth();
-    authentication.onAuthStateChanged(auth, function (user) {
-      if (user) {
-        // User is signed in.
-        console.log(user.displayName);
-      } else {
-        // No user is signed in.
-        console.log('tem')
-      }
-    });
-  }
+  // test() {
+  //   const auth = getAuth();
+  //   authentication.onAuthStateChanged(auth, function (user) {
+  //     if (user) {
+  //       // User is signed in.
+  //       console.log(user.displayName);
+  //     } else {
+  //       // No user is signed in.
+  //       console.log('tem')
+  //     }
+  //   });
+  // }
 
 
 

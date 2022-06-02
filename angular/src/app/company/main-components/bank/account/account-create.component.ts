@@ -6,12 +6,17 @@ import { ValidatorsGlobal } from 'src/app/company/shared/services/operations/val
 import { AccountCreateService } from './services/account-create.service';
 import { ThisReceiver } from '@angular/compiler';
 import { StringDecoder } from 'string_decoder';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { FireBaseDbService } from 'src/app/company/shared/services/operations/fire-base-db.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
   selector: 'account-create',
   templateUrl: './account-create.component.html',
-  styleUrls: ['./account-create.component.css']
+  styleUrls: ['./account-create.component.css'],
+
+
 })
 export class AccountCreateComponent implements OnInit {
 
@@ -25,7 +30,8 @@ export class AccountCreateComponent implements OnInit {
   private _formContact: FormGroup
   constructor(
     private _Validator: ValidatorsGlobal,
-    private _AccountService: AccountCreateService
+    private _AccountService: AccountCreateService,
+    private _FireBaseDbService: FireBaseDbService,
 
   ) { }
 
@@ -38,7 +44,6 @@ export class AccountCreateComponent implements OnInit {
 
     return this.tp;
   }
-
   get typeKeyChange(): any[] {
 
     this._AccountService.pixTypeSingle.forEach((item) => {
@@ -51,7 +56,6 @@ export class AccountCreateComponent implements OnInit {
 
 
   }
-
   typeKChange($event) {
     this.tp = $event.target.value
 
@@ -93,17 +97,13 @@ export class AccountCreateComponent implements OnInit {
   addControls() {
     this._AccountService.addControls()
   }
-
   removeControls(i) {
     this._AccountService.removeControls(i);
   }
-
-
   get controls(): FormArray {
     return this._AccountService.cardsControls
   }
-
-  async save(base: string, form:any) {
+  async save(base: string, form: any) {
     this._AccountService.save(base, form);
   }
 

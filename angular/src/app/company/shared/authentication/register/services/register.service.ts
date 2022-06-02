@@ -40,51 +40,51 @@ export class RegisterService extends BackEnd<RegisterDto, number> {
   //   return this._formMain
   // }
 
-  // formLoad() {
-  //   return this._formMain = this._Fb.group({
-  //     email: ['', [Validators.required]],
-  //     userName: ['', [Validators.required]],
-  //     fullName: ['', [Validators.required]],
-  //     password: ['', [Validators.required]],
-  //     confirmPassword: ['', [Validators.required]],
-  //   })
-  // }
+  formLoad() {
+    return this._formMain = this._Fb.group({
+      email: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
+      fullName: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+    })
+  }
 
-  // async addUserRegister(user: RegisterDto) {
+  async addUserRegister(user: RegisterDto) {
 
-  //   try {
-  //     const docRef = await addDoc(collection(this._FireBaseDbService.dbLoad(), "users_details"), {
-  //       "userName": user.userName,
-  //       "email": user.email,
-  //       "fullName": user.fullName,
-  //     });
-  //     console.log("Document written with ID: ", docRef.id);
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
+    try {
+      const docRef = await addDoc(collection(this._FireBaseDbService.dbLoad(), "users_details"), {
+        "userName": user.userName,
+        "email": user.email,
+        "fullName": user.fullName,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
 
 
-  // }
+  }
 
-  // registerUser() {
-  //   const register: RegisterDto = { ...this._formMain.value }
-  //   const auth = getAuth();
+  registerUser() {
+    const register: RegisterDto = { ...this._formMain.value }
+    const auth = getAuth();
 
-  //   authentication.createUserWithEmailAndPassword(auth, register.email, register.password)
-  //     .then(function (res) {
+    authentication.createUserWithEmailAndPassword(auth, register.email, register.password)
+      .then(function (res) {
 
-  //       delete register.password;
-  //       delete register.confirmPassword;
+        delete register.password;
+        delete register.confirmPassword;
 
-  //       this.addUserRegister(register);
+        this.addUserRegister(register);
 
-  //       this._Router.navigateByUrl('/login');
+        this._Router.navigateByUrl('/login');
 
-  //     }).catch((err: Error) => {
-  //       this._AlertsToastr.Notice(`Usuário,  ${register.userName}`, 5, 'error');
-  //     })
+      }).catch((err: Error) => {
+        this._AlertsToastr.Notice(`Usuário,  ${register.userName}`, 5, 'error');
+      })
 
-  // }
+  }
 
 
 
