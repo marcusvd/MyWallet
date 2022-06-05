@@ -5,13 +5,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgxModule } from "src/app/company/shared/modules/ngx.module";
 import { SharedModule } from "src/app/company/shared/modules/shared.module";
-import { AccountCreateComponent } from '../account/account-create.component';
+import { AccountCreateComponent } from '../account/create/account-create.component';
 import { AccountCreateService } from '../account/services/account-create.service';
+import { NavBankComponent } from '../account/nav-bank/nav-bank.component';
+import { AccountListComponent } from '../account/list/account-list.component';
+import { AccountListService } from '../account/services/account-list.service';
 
 @NgModule({
   declarations: [
-    AccountCreateComponent
-
+    AccountCreateComponent,
+    AccountListComponent,
+    NavBankComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +28,9 @@ import { AccountCreateService } from '../account/services/account-create.service
   exports: [
 
   ],
-  providers: [AccountCreateService]
+  providers: [
+    AccountCreateService,
+    AccountListService
+  ]
 })
 export class BankModule { }

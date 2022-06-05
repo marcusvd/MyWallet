@@ -5,6 +5,8 @@ import { FireBaseDbService } from './company/shared/services/operations/fire-bas
 //Auth and database
 import * as authentication from 'firebase/auth'
 import { getAuth } from 'firebase/auth';
+import { AuthService } from './company/shared/authentication/auth/auth.service';
+
 
 
 @Component({
@@ -20,26 +22,29 @@ export class AppComponent implements OnInit {
   constructor(
     private _router: Router,
     public _ProductNavService: ProductNavService,
-    public _FbDataBase: FireBaseDbService
+    public _FbDataBase: FireBaseDbService,
+    public _Auth: AuthService
   ) { }
 
 
-  // collapsed = true;
-  // toggleCollapsed(): void {
-  //   this.collapsed = !this.collapsed;
-  // }
+  setCurrentUser(): void {
+    let user: authentication.User;
+
+    if (localStorage.getItem('user'))
+      user = JSON.parse(localStorage.getItem('usr') ?? '{}');
+    else
+      user = null
+
+  //  if (user)
+   //   this._Auth.setUserData(user);
+  }
 
 
   ngOnInit(): void {
-  this._FbDataBase.dbLoad();
+    this._Auth.loggedInUser = JSON.parse(localStorage.getItem('usr'));
+  //  this.setCurrentUser();
 
-  authentication?.onAuthStateChanged(getAuth(), (user) => {
-    if (user) {
-      return user?.displayName;
-    }
-    return null;
-  })
-
+    this._FbDataBase.dbLoad();
   }
 
 }

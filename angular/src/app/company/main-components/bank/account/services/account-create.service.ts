@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Form, FormArray, FormControl } from "@angular/forms";
 import { FormArrayName, FormBuilder, FormGroup, FormGroupName, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { AlertsToastr } from "src/app/company/shared/services/operations/alerts-toastr";
 import { FireBaseDbService } from "src/app/company/shared/services/operations/fire-base-db.service";
 import { ValidatorsGlobal } from "src/app/company/shared/services/operations/validators-global";
@@ -60,31 +60,40 @@ export class AccountCreateService {
 
 
   async save(base: string, form: any) {
+    let entity = form;
 
-    //  if (base || form === null || undefined || NaN) return null;
-
+    entity.cards.forEach(item => {
+      item.validate = Timestamp.fromDate(new Date(item.validate))
+    })
     try {
 
-     // const docRef = await addDoc(collection(this._FireBaseDbService.dbLoad(), base), form as JSON);
+      const docRef = await addDoc(collection(this._FireBaseDbService.dbLoad(), base), {
+        institution: entity.institution,
+        holder: entity.holder,
+        agency: entity.agency,
+        account: entity.account,
+        pix: entity.pix,
+        typeaccount: entity.typeaccount,
+        description: entity.description,
+        cards: entity.cards
 
-      // this._Router.navigateByUrl('/login');
+      });
+      //this._Router.navigateByUrl('/login');
+      this._AlertsToastr.Notice(`Conta do banco, ${form.institution}`, 0, 'success');
 
-      this._AlertsToastr.Notice(`Conta do banco,  ${form.value.institution}`, 0, 'success');
+      this._Card.reset();
+      this._formAccount.reset();
 
-   //   return form //docRef.id;
-
-
+      return docRef.id;
     } catch (e) {
       console.log(e);
-
     }
-
+    return form;
   }
 
   get formGet(): FormGroup {
     return this._formAccount;
   }
-
 
   get socialNetwork(): CardDto[] {
     return this._cards
@@ -93,71 +102,33 @@ export class AccountCreateService {
   tPix(pix: string) {
     switch (pix) {
       case 'CPF':
-        // this._CPF = true
-        // this._CNPJ = false
-        // this._CELULAR = false
-        // this._EMAIL = false
-
         this._keys[0].selected = true
         this._keys[1].selected = false
         this._keys[2].selected = false
         this._keys[3].selected = false
-
-
-        console.log(this._keys)
         return this._keys
       case 'CNPJ':
-        // this._CNPJ = true
-        // this._CPF = false
-        // this._EMAIL = false
-        // this._CELULAR = false
 
         this._keys[1].selected = true
         this._keys[0].selected = false
         this._keys[2].selected = false
         this._keys[3].selected = false
-
-        console.log(this._keys)
         return this._keys
+
       case 'CELULAR':
-
-        // this._CELULAR = true
-        // this._CNPJ = false
-        // this._CPF = false
-        // this._EMAIL = false
-        // console.log(this._keys)
-
         this._keys[2].selected = true
         this._keys[0].selected = false
         this._keys[1].selected = false
         this._keys[3].selected = false
-
-
         return this._keys
-      case 'E-MAIL':
-        // this._EMAIL = true
-        // this._CELULAR = false
-        // this._CNPJ = false
-        // this._CPF = false
 
+      case 'E-MAIL':
         this._keys[3].selected = true
         this._keys[0].selected = false
         this._keys[1].selected = false
         this._keys[2].selected = false
-
         return this._keys
-
-
-
-
     }
-
-
-    // this._CPF = false
-    // this._CNPJ = false
-    // this._CELULAR = false
-    // this._EMAIL = false
-
     this._keys[0].selected = false
     this._keys[1].selected = false
     this._keys[2].selected = false
@@ -173,8 +144,8 @@ export class AccountCreateService {
       account: ['', []],
       pix: ['', []],
       typeaccount: ['', []],
-      cards: this._Fb.array([]),
       description: ['', []],
+      cards: this._Fb.array([]),
     });
   }
 
@@ -191,7 +162,6 @@ export class AccountCreateService {
 
   }
 
-
   get cardsControls() {
     return this._formAccount.controls['cards'] as FormArray;
   }
@@ -199,13 +169,8 @@ export class AccountCreateService {
   addControls() {
     this.cardsControls.push(this.card());
   }
+
   removeControls(i: number) {
     this.cardsControls.removeAt(i);
   }
-
-
-
-
-
-
 }

@@ -24,9 +24,11 @@ import { FireBaseDbService } from './company/shared/services/operations/fire-bas
 import { AuthenticationModule } from './company/shared/authentication/auth/module/authentication.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
+
 
   ],
   imports: [

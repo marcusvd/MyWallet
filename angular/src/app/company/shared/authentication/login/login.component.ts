@@ -39,12 +39,6 @@ export class LoginComponent implements OnInit {
 
   nameToShowNav() {
 
-    authentication?.onAuthStateChanged(getAuth(), (user) => {
-      if (user) {
-        return user?.displayName;
-      }
-      return null;
-    })
 
     // const result = JSON.parse(localStorage.getItem('usr')) as User;
 

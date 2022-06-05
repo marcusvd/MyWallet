@@ -3,7 +3,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { ContactDto } from 'src/app/company/shared/shareds-components/contact/dto/contact-dto';
 import { SocialNetworkDto } from 'src/app/company/shared/shareds-components/contact/dto/social-network-dto';
 import { ValidatorsGlobal } from 'src/app/company/shared/services/operations/validators-global';
-import { AccountCreateService } from './services/account-create.service';
+import { AccountCreateService } from '../services/account-create.service';
 import { ThisReceiver } from '@angular/compiler';
 import { StringDecoder } from 'string_decoder';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
@@ -89,11 +89,7 @@ export class AccountCreateComponent implements OnInit {
   public touchedErrorsArray(formArray: FormArray, ctrl: string) {
     return this._Validator.touchedErrorsArray(formArray, ctrl);
   }
-  // public commonValidations(ctrl: string, error: string, msg: string, formGroup: FormGroup) {
-  //   return formGroup.get(ctrl).hasError(error)
-  //     ? msg : formGroup.get(ctrl).hasError(error)
-  //       ? msg : formGroup.get(ctrl).hasError(error) ? '' : '';
-  // }
+
   addControls() {
     this._AccountService.addControls()
   }
@@ -104,6 +100,8 @@ export class AccountCreateComponent implements OnInit {
     return this._AccountService.cardsControls
   }
   async save(base: string, form: any) {
+
+
     this._AccountService.save(base, form);
   }
 

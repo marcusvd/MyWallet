@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountCreateComponent } from './company/main-components/bank/account/account-create.component';
+import { AccountCreateComponent } from './company/main-components/bank/account/create/account-create.component';
 import { FinancialRegisterCreateComponent } from 'src/app/company/main-components/flows/register/financial-register-create.component';
 import { ProductCreateComponent } from './company/main-components/product/product-create/product-create.component';
 import { ProductNavComponent } from './company/main-components/product/product-nav/product-nav.component';
@@ -11,16 +11,26 @@ import { InOutCreateComponent } from './company/main-components/flows/in-out/in-
 import { LoginComponent } from 'src/app/company/shared/authentication/login/login.component';
 import { RegisterComponent } from 'src/app/company/shared/authentication/register/register.component';
 import { WelcomeDashComponent } from './company/shared/shareds-components/welcome-dash/welcome-dash.component';
+import { NavBankComponent } from './company/main-components/bank/account/nav-bank/nav-bank.component';
+import { AccountListComponent } from './company/main-components/bank/account/list/account-list.component';
 
 const routes: Routes = [
 
 
   { path: 'operations', component: FinancialRegisterCreateComponent },
   { path: 'inout', component: InOutCreateComponent },
-  { path: 'account', component: AccountCreateComponent },
+  {
+    path: 'bank', component: NavBankComponent, children: [
+      { path: 'create', component: AccountCreateComponent },
+      { path: 'list', component: AccountListComponent },
+    ]
+  },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'welcomedash', component: WelcomeDashComponent }
+
+
 
 ];
 
