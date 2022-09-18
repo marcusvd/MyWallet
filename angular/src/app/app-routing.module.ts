@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountCreateComponent } from './company/main-components/bank/account/create/account-create.component';
-import { FinancialRegisterCreateComponent } from 'src/app/company/main-components/flows/register/financial-register-create.component';
-import { ProductCreateComponent } from './company/main-components/product/product-create/product-create.component';
-import { ProductNavComponent } from './company/main-components/product/product-nav/product-nav.component';
-import { AddressComponent } from './company/shared/shareds-components/address/address.component';
-import { ContactComponent } from './company/shared/shareds-components/contact/contact.component';
-import { GeneralRegistersComponent } from './company/shared/shareds-components/general-registers/general-registers.component';
-import { InOutCreateComponent } from './company/main-components/flows/in-out/in-out-create.component';
-import { LoginComponent } from 'src/app/company/shared/authentication/login/login.component';
-import { RegisterComponent } from 'src/app/company/shared/authentication/register/register.component';
-import { WelcomeDashComponent } from './company/shared/shareds-components/welcome-dash/welcome-dash.component';
-import { NavBankComponent } from './company/main-components/bank/account/nav-bank/nav-bank.component';
-import { AccountListComponent } from './company/main-components/bank/account/list/account-list.component';
+import { AccountCreateComponent } from './company/components/bank/account/create/account-create.component';
+import { AccountListComponent } from './company/components/bank/account/list/account-list.component';
+import { NavBankComponent } from './company/components/bank/account/nav-bank/nav-bank.component';
+import { InOutCreateComponent } from './company/components/flows/in-out/in-out-create.component';
+import { FinancialRegisterCreateComponent } from './company/components/flows/register/financial-register-create.component';
+import { LoginComponent } from './company/modules/core/components/authentication/login/login.component';
+import { RegisterComponent } from './company/modules/core/components/authentication/register/register.component';
+import { WelcomeDashComponent } from './company/modules/shared/components/welcome-dash/components/welcome-dash.component';
+
 
 const routes: Routes = [
 

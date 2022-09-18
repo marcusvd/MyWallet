@@ -1,1 +1,3 @@
-<nav-main></nav-main>
+<login-comp *ngIf="!_auth.loggedInUser">
+</login-comp>
+<nav-bar-main *ngIf="_auth.loggedInUser"></nav-bar-main>
